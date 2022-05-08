@@ -1,0 +1,14 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
+  "id": "ConfirmPlaylistDifficulty",
+  "name": "ConfirmPlaylistDifficulty",
+  "author": "rakkyo150",
+  "version": "1.0.0",
+  "description": "",
+  "gameVersion": "1.21.0",
+    "dependsOn": {
+        "BSIPA": "^4.2.0",
+        "BeatSaberMarkupLanguage": "^1.6.0",
+        "PlaylistManager": "^1.6.0"
+    }
+}
