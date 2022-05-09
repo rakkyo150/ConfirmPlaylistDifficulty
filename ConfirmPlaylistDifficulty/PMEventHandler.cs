@@ -28,7 +28,7 @@ namespace ConfirmPlaylistDifficulty
     public class PMEventHandler : MonoBehaviour
     {
         public static PMEventHandler Instance { get; set; }
-
+        
         private void Awake()
         {
             if (Instance != null)
@@ -47,17 +47,16 @@ namespace ConfirmPlaylistDifficulty
 
         public void OnDisable()
         {
-            PlaylistManager.Utilities.Events.playlistSongSelected -= PlaylistSongSelected; 
+            PlaylistManager.Utilities.Events.playlistSongSelected -= PlaylistSongSelected;
         }
 
         public void PlaylistSongSelected(IPlaylistSong ps)
         {
-            if(PluginConfig.Instance.Enable)
+            DataModel.playlistSong = ps;
+            if (PluginConfig.Instance.Enable)
             {
-                DataModel.playlistSong = ps;
                 DataModel.RefreshButtonColor();
-            }
-            
+            }            
         }
     }
 }

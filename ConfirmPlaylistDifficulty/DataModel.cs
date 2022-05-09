@@ -21,38 +21,43 @@ namespace ConfirmPlaylistDifficulty
 
         public static void RefreshButtonColor()
         {
-            bool red = true;
-
-            if (DataModel.playlistSong != null)
-            {
-                if (DataModel.playlistSong.Difficulties != null)
+            // playlistSongのキャッシュがある場合
+            if (DataModel.playlistSong != null && DataModel.difficultyBeatmap!=null && DataModel.characteristic!=null)
+            {                   
+                if(DataModel.playlistSong.levelID == DataModel.difficultyBeatmap.level.levelID)
                 {
-                    foreach (var difficulty in DataModel.playlistSong.Difficulties)
+                    // プレイリストの難易度指定が無い場合
+                    if (DataModel.playlistSong.Difficulties == null)
                     {
-                        Plugin.Log.Debug("PlaylistSongSelected : " + difficulty.Characteristic);
-                        Plugin.Log.Debug("PlaylistSongSelected : " + difficulty.BeatmapDifficulty.ToString());
-
-                        Plugin.Log.Debug("Harmony : " + DataModel.characteristic.ToString());
-                        Plugin.Log.Debug("Harmony : " + DataModel.difficultyBeatmap.difficulty.ToString());
-
-                        if (difficulty.Characteristic == DataModel.characteristic.ToString() && difficulty.BeatmapDifficulty == DataModel.difficultyBeatmap.difficulty)
-                        {
-                            red = false;
-                            break;
-                        }
+                        ChangeStartButtonColor(false);
+                        return;
                     }
-                    ChangeStartButtonColor(red);
+                    // プレイリストの難易度指定がある場合
+                    else
+                    {
+                        foreach (var difficulty in DataModel.playlistSong.Difficulties)
+                        {
+                            // プレイリストの難易度を選択している場合
+                            if (difficulty.Characteristic == DataModel.characteristic.ToString()
+                                && difficulty.BeatmapDifficulty == DataModel.difficultyBeatmap.difficulty)
+                            {
+                                ChangeStartButtonColor(false);
+                                return;
+                            }
+                        }
+
+                        // プレイリストの難易度を選択していない場合
+                        ChangeStartButtonColor(true);
+                        return;
+                    }
                 }
-                else
-                {
-                    ChangeStartButtonColor(false);
-                }
+
+                ChangeStartButtonColor(false);
             }
         }
 
         public static void ChangeStartButtonColor(bool red)
         {
-            // StandardLevelDetailView standardLevelDetailView = Resources.FindObjectsOfTypeAll<StandardLevelDetailView>().FirstOrDefault<StandardLevelDetailView>();
             foreach (var bg in DataModel._actionButton.GetComponentsInChildren<ImageView>())
             {
                 if (bg.name == "BG")
