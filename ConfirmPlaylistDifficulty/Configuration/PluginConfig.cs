@@ -1,12 +1,5 @@
-﻿
-using System;
-using System.Linq;
-using System.Reflection;
+﻿using IPA.Config.Stores;
 using System.Runtime.CompilerServices;
-using BeatSaberPlaylistsLib.Types;
-using IPA.Config.Stores;
-using IPA.Utilities;
-using UnityEngine;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ConfirmPlaylistDifficulty.Configuration
@@ -16,13 +9,13 @@ namespace ConfirmPlaylistDifficulty.Configuration
         public static PluginConfig Instance { get; set; }
 
         private bool enable = true;
-        public virtual bool Enable 
+        public virtual bool Enable
         {
             get { return enable; }
-            set 
+            set
             {
                 // DataModel.defaultColor != nullやDataModel._actionButton != nullとなることはないはずだけど一応
-                if (value == false && DataModel.defaultColor!=null && DataModel._actionButton!=null)
+                if (value == false && DataModel.defaultColor != null && DataModel._actionButton != null)
                 {
                     DataModel.ChangeStartButtonColor(false);
                 }
@@ -30,7 +23,7 @@ namespace ConfirmPlaylistDifficulty.Configuration
                 {
                     DataModel.RefreshButtonColor();
                 }
-                
+
                 enable = value;
             }
         }

@@ -3,12 +3,8 @@ using HarmonyLib;
 using HMUI;
 using IPA.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 /// <summary>
 /// See https://github.com/pardeike/Harmony/wiki for a full reference on Harmony.
@@ -47,15 +43,15 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
 
             if (PluginConfig.Instance.Enable)
             {
-                if(selectLevelCategoryViewController.selectedLevelCategory != SelectLevelCategoryViewController.LevelCategory.CustomSongs)
+                if (selectLevelCategoryViewController.selectedLevelCategory != SelectLevelCategoryViewController.LevelCategory.CustomSongs)
                 {
-                    if (DataModel.defaultColor != null && DataModel._actionButton!=null)
+                    if (DataModel.defaultColor != null && DataModel._actionButton != null)
                     {
                         foreach (var bg in DataModel._actionButton.GetComponentsInChildren<ImageView>())
                         {
                             if (bg.name == "BG")
                             {
-                                if(bg.color == Color.red)
+                                if (bg.color == Color.red)
                                 {
                                     bg.color = DataModel.defaultColor;
                                     bg.SetField("_gradient", true);

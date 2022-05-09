@@ -60,11 +60,6 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="BS_Utils">
-      <HintPath>$(BeatSaberDir)\Plugins\BS_Utils.dll</HintPath>
-      <Private>False</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="PlaylistManager">
       <HintPath>$(BeatSaberDir)\Plugins\PlaylistManager.dll</HintPath>
       <Private>False</Private>

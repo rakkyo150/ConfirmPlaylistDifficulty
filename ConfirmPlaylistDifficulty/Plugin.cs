@@ -1,18 +1,10 @@
-﻿using BS_Utils.Utilities;
-using ConfirmPlaylistDifficulty.Configuration;
+﻿using ConfirmPlaylistDifficulty.Configuration;
 using ConfirmPlaylistDifficulty.Installers;
 using HarmonyLib;
 using IPA;
-using IPA.Config;
 using IPA.Config.Stores;
 using SiraUtil.Zenject;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Config = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 
@@ -21,7 +13,7 @@ namespace ConfirmPlaylistDifficulty
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
     {
-        public const string HarmonyId = "com.github.rakkyo150.ComfirmPlaylistDifficulty";
+        public const string HarmonyId = "com.github.rakkyo150.ConfirmPlaylistDifficulty";
 
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
@@ -34,7 +26,7 @@ namespace ConfirmPlaylistDifficulty
         /// [Init] methods that use a Constructor or called before regular methods like InitWithConfig.
         /// Only use [Init] with one Constructor.
         /// </summary>
-        public void Init(IPALogger logger,Config conf, Zenjector zenjector)
+        public void Init(IPALogger logger, Config conf, Zenjector zenjector)
         {
             Instance = this;
             Log = logger;

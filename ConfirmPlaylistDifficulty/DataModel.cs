@@ -1,11 +1,6 @@
 ﻿using BeatSaberPlaylistsLib.Types;
 using HMUI;
 using IPA.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,9 +17,9 @@ namespace ConfirmPlaylistDifficulty
         public static void RefreshButtonColor()
         {
             // playlistSongのキャッシュがある場合
-            if (DataModel.playlistSong != null && DataModel.difficultyBeatmap!=null && DataModel.characteristic!=null)
-            {                   
-                if(DataModel.playlistSong.levelID == DataModel.difficultyBeatmap.level.levelID)
+            if (DataModel.playlistSong != null && DataModel.difficultyBeatmap != null && DataModel.characteristic != null)
+            {
+                if (DataModel.playlistSong.levelID == DataModel.difficultyBeatmap.level.levelID)
                 {
                     // プレイリストの難易度指定が無い場合
                     if (DataModel.playlistSong.Difficulties == null)
