@@ -21,19 +21,28 @@ namespace ConfirmPlaylistDifficulty
 
         internal static void RefreshPlayButton()
         {
-            var isTargetLevelSelected = playlistSong?.levelID == difficultyBeatmap?.level?.levelID;
+            bool shouldWarn;
 
-            var selectedCharasteristic = difficultyBeatmap?.parentDifficultyBeatmapSet?.beatmapCharacteristic?.serializedName;
+            // プレイリストの難易度指定が無い場合
+            if (playlistSong?.Difficulties == null)
+            {
+                shouldWarn = false;
+            }
+            else
+            {
+                var isTargetLevelSelected = playlistSong?.levelID == difficultyBeatmap?.level?.levelID;
 
-            var isTargetDifficultySelected =
-                selectedCharasteristic != null &&
-                playlistSong
-                    ?.Difficulties
-                    ?.Any(x => x.Characteristic == selectedCharasteristic && x.BeatmapDifficulty == difficultyBeatmap?.difficulty)
-                    == true;
+                var selectedCharasteristic = difficultyBeatmap?.parentDifficultyBeatmapSet?.beatmapCharacteristic?.serializedName;
 
-            var shouldWarn = isTargetLevelSelected && !isTargetDifficultySelected;
+                var isTargetDifficultySelected =
+                    selectedCharasteristic != null &&
+                    playlistSong
+                        ?.Difficulties
+                        ?.Any(x => x.Characteristic == selectedCharasteristic && x.BeatmapDifficulty == difficultyBeatmap?.difficulty)
+                        == true;
 
+                shouldWarn = isTargetLevelSelected && !isTargetDifficultySelected;
+            }
 
             if (PluginConfig.Instance.CantClick)
             {
@@ -52,7 +61,7 @@ namespace ConfirmPlaylistDifficulty
 
         internal static void ChangePlayButtonColor(bool toWarning)
         {
-            // いきなりプレイリストの曲を選ぶと_actionButtonが生焼けなのにイベントが発火してしまう
+            // いきなりプレイリストの曲を選ぶ場合、_actionButtonが生焼けなのにPlaylistManagerのイベントが発火してしまう
             if (DataModel._actionButton?.IsDestroyed() != false)
             {
                 Plugin.Log.Warn($"Action button is destroyed. Skip starting button change.");
