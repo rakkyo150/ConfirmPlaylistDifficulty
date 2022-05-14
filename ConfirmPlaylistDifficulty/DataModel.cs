@@ -102,8 +102,8 @@ namespace ConfirmPlaylistDifficulty
 
             if (PluginConfig.Instance.ChangeText)
             {
-                if (toWarning) DataModel._actionButtonText.text = "(>_<)";
-                else DataModel._actionButtonText.text = "(⁎ᵕᴗᵕ⁎)";
+                if (toWarning) DataModel._actionButtonText.text = PluginConfig.Instance.WarnPlayButtonText;
+                else DataModel._actionButtonText.text = PluginConfig.Instance.NormalPlayButtonText;
             }
             else
             {

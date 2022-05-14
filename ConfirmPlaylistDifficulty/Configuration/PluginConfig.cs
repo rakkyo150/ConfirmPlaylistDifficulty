@@ -48,6 +48,9 @@ namespace ConfirmPlaylistDifficulty.Configuration
             }
         }
 
+        public string WarnPlayButtonText { get; set; } = "(>_<)";
+        public string NormalPlayButtonText { get; set; } = "(⁎ᵕᴗᵕ⁎)";
+
         private bool cantClick = true;
         public bool CantClick
         {
