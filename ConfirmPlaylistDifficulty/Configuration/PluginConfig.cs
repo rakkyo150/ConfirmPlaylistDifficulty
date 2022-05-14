@@ -1,5 +1,5 @@
-﻿using IPA.Config.Stores;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
+using IPA.Config.Stores;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ConfirmPlaylistDifficulty.Configuration
@@ -11,20 +11,22 @@ namespace ConfirmPlaylistDifficulty.Configuration
         private bool enable = true;
         public virtual bool Enable
         {
-            get { return enable; }
+            get => this.enable;
             set
             {
-                // DataModel.defaultColor != nullやDataModel._actionButton != nullとなることはないはずだけど一応
-                if (value == false && DataModel.defaultColor != null && DataModel._actionButton != null)
+                if (this.enable != value)
                 {
-                    DataModel.ChangeStartButtonColor(false);
-                }
-                else if (value == true && DataModel.defaultColor != null && DataModel._actionButton != null)
-                {
-                    DataModel.RefreshButtonColor();
+                    this.enable = value;
+                    if (value)
+                    {
+                        DataModel.RefreshButtonColor();
+                    }
+                    else
+                    {
+                        DataModel.ChangeStartButtonColor(toWarningColor: false);
+                    }
                 }
 
-                enable = value;
             }
         }
     }

@@ -22,7 +22,7 @@ namespace ConfirmPlaylistDifficulty
             Instance = this;
         }
 
-        public void Start()
+        public void OnEnable()
         {
             PlaylistManager.Utilities.Events.playlistSongSelected += PlaylistSongSelected;
         }
