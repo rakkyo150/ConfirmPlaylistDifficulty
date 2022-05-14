@@ -11,11 +11,18 @@ namespace ConfirmPlaylistDifficulty.Views
     {
         public override string ResourceName => "ConfirmPlaylistDifficulty.Views.SettingView.bsml";
 
-        [UIValue("enable")]
-        public bool Enable
+        [UIValue("changeColor")]
+        public bool ChangeColor
         {
-            get => PluginConfig.Instance.Enable;
-            set => PluginConfig.Instance.Enable = value;
+            get => PluginConfig.Instance.ChangeColor;
+            set => PluginConfig.Instance.ChangeColor = value;
+        }
+
+        [UIValue("changeText")]
+        public bool ChangeText
+        {
+            get => PluginConfig.Instance.ChangeText;
+            set => PluginConfig.Instance.ChangeText = value;
         }
 
         protected override void OnDestroy()
@@ -27,7 +34,6 @@ namespace ConfirmPlaylistDifficulty.Views
 
         public void Initialize()
         {
-            Plugin.Log.Debug(ResourceName);
             GameplaySetup.instance.AddTab("Confirm Playlist Difficulty", ResourceName, this);
         }
     }

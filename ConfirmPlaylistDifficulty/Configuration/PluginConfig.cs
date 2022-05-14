@@ -8,25 +8,43 @@ namespace ConfirmPlaylistDifficulty.Configuration
     {
         public static PluginConfig Instance { get; set; }
 
-        private bool enable = true;
-        public virtual bool Enable
+        private bool changeColor = true;
+        public virtual bool ChangeColor
         {
-            get => this.enable;
+            get => this.changeColor;
             set
             {
-                if (this.enable != value)
+                if (this.changeColor != value)
                 {
-                    this.enable = value;
+                    this.changeColor = value;
                     if (value)
                     {
-                        DataModel.RefreshButtonColor();
+                        DataModel.RefreshPlayButton();
                     }
                     else
                     {
-                        DataModel.ChangeStartButtonColor(toWarningColor: false);
+                        DataModel.ChangePlayButtonColor(toWarning: false);
                     }
                 }
 
+            }
+        }
+
+        private bool changeText = true;
+        public bool ChangeText
+        {
+            get => this.changeText;
+            set
+            {
+                this.changeText = value;
+                if (value)
+                {
+                    DataModel.RefreshPlayButton();
+                }
+                else
+                {
+                    DataModel.ChangePlayButtonText(toWarning: false);
+                }
             }
         }
     }
