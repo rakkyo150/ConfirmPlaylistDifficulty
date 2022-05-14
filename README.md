@@ -18,5 +18,5 @@ v1.1.0では以下の更新があります。
 さらに、堅牢な設計にもしていただきました。<br>
 感謝いたします。<br>
 また、プレイボタンのテキスト変更機能とプレイボタンを押せなくする機能を追加しました。<br>
-プレイボタンのテキストは、BeatSaber/UserData/ConfirmPlaylistDifficulty.jsonを直接編集することで変更できます。<br>
+プレイボタンのテキストは、Beat Saber/UserData/ConfirmPlaylistDifficulty.jsonを直接編集することで変更できます。<br>
 もし、このファイルが無い場合は、Beat Saberを一度起動・終了させてからもう一度確認してみてください。
