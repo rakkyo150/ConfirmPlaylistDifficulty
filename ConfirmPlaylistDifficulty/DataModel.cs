@@ -19,7 +19,7 @@ namespace ConfirmPlaylistDifficulty
         internal static TextMeshProUGUI _actionButtonText;
         internal static string defaultText;
 
-        internal static void RefreshPlayButton()
+        internal static bool RefreshPlayButton()
         {
             var isTargetLevelSelected = playlistSong?.levelID == difficultyBeatmap?.level?.levelID;
 
@@ -33,6 +33,7 @@ namespace ConfirmPlaylistDifficulty
                     == true;
 
             var shouldWarn = isTargetLevelSelected && !isTargetDifficultySelected;
+            
             if (PluginConfig.Instance.ChangeColor)
             {
                 ChangePlayButtonColor(toWarning: shouldWarn);
@@ -41,6 +42,12 @@ namespace ConfirmPlaylistDifficulty
             {
                 ChangePlayButtonText(toWarning: shouldWarn);
             }
+            if (PluginConfig.Instance.CantClick)
+            {
+                ChangePlayButtonInteractable(toWarning: shouldWarn);
+            }
+
+            return shouldWarn;
         }
 
         internal static void ChangePlayButtonColor(bool toWarning)
@@ -102,6 +109,24 @@ namespace ConfirmPlaylistDifficulty
             {
                 DataModel._actionButtonText.text = DataModel.defaultText;
             }
+        }
+
+        internal static void ChangePlayButtonInteractable(bool toWarning)
+        {
+            if (DataModel._actionButton?.IsDestroyed() != false)
+            {
+                Plugin.Log.Warn($"Action button is destroyed. Skip starting button change.");
+                return;
+            }
+
+            if (DataModel._actionButton.gameObject == null)
+            {
+                Plugin.Log.Warn($"DataModel._actionButton is null. Skip starting button change.");
+                return;
+            }
+
+            if(toWarning) DataModel._actionButton.interactable = false;
+            else DataModel._actionButton.interactable = true;
         }
     }
 }

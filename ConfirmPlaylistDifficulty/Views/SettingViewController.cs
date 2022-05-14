@@ -25,6 +25,13 @@ namespace ConfirmPlaylistDifficulty.Views
             set => PluginConfig.Instance.ChangeText = value;
         }
 
+        [UIValue("cantClick")]
+        public bool CantClick
+        {
+            get => PluginConfig.Instance.CantClick;
+            set => PluginConfig.Instance.CantClick = value;
+        }
+
         protected override void OnDestroy()
         {
             GameplaySetup.instance.RemoveTab("Confirm Playlist Difficulty");

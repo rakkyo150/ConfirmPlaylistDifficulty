@@ -47,5 +47,33 @@ namespace ConfirmPlaylistDifficulty.Configuration
                 }
             }
         }
+
+        private bool cantClick = true;
+        public bool CantClick
+        {
+            get => this.cantClick;
+            set
+            {
+                this.cantClick = value;
+                if (value)
+                {
+                    DataModel.RefreshPlayButton();
+                }
+                else
+                {
+                    DataModel.ChangePlayButtonInteractable(toWarning: false);
+                    
+                    // ButtonのinteractableをfalseにしているとImageViewを取得できず色を変更出来ないので
+                    if (changeColor)
+                    {
+                        DataModel.RefreshPlayButton();
+                    }
+                    else
+                    {
+                        DataModel.ChangePlayButtonColor(toWarning: false);
+                    }
+                }
+            }
+        }
     }
 }
