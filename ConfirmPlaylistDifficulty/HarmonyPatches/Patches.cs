@@ -2,6 +2,7 @@
 using ConfirmPlaylistDifficulty.Configuration;
 using HarmonyLib;
 using HMUI;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -22,19 +23,22 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
         /// <param name="arg1">The Parameter1Type arg1 that was passed to MethodToPatch</param>
         /// <param name="____privateFieldInClassToPatch">Reference to the private field in ClassToPatch named '_privateFieldInClassToPatch', 
         ///     added three _ to the beginning to reference it in the patch. Adding ref means we can change it.</param>
-        private static void Postfix(IBeatmapLevel ____level, IDifficultyBeatmap ____selectedDifficultyBeatmap, LevelParamsPanel ____levelParamsPanel, StandardLevelDetailView __instance)
+        private static void Postfix(IBeatmapLevel ____level, IDifficultyBeatmap ____selectedDifficultyBeatmap, LevelParamsPanel ____levelParamsPanel, TextMeshProUGUI ____actionButtonText, StandardLevelDetailView __instance)
         {
             var actionButton = DataModel._actionButton = __instance.actionButton;
+            var actionButtonText = DataModel._actionButtonText = ____actionButtonText;
 
             DataModel.difficultyBeatmap = ____selectedDifficultyBeatmap;
-            DataModel.selectedLevelCategory = Resources.FindObjectsOfTypeAll<SelectLevelCategoryViewController>()
-                .FirstOrDefault()
-                ?.selectedLevelCategory
-                ?? SelectLevelCategoryViewController.LevelCategory.None;
 
             if (actionButton?.gameObject == null)
             {
                 Plugin.Log.Error("Failed to obtain actionButton.");
+                return;
+            }
+
+            if(actionButtonText == null)
+            {
+                Plugin.Log.Error("Failed to obtain actionButtonText.");
                 return;
             }
 
@@ -48,9 +52,14 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
                         ?? default;
             }
 
-            if (PluginConfig.Instance.Enable)
+            if(DataModel.defaultText == default)
             {
-                DataModel.RefreshButtonColor();
+                DataModel.defaultText = actionButtonText.text;
+            }
+
+            if (PluginConfig.Instance.ChangeColor || PluginConfig.Instance.ChangeText)
+            {
+                DataModel.RefreshPlayButton();
             }
         }
     }
