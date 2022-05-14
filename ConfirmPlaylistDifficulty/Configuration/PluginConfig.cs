@@ -57,24 +57,21 @@ namespace ConfirmPlaylistDifficulty.Configuration
             get => this.cantClick;
             set
             {
+                // RefreshPlayButtonにおいてChangePlayButtonInteractableを実行する場合、ChangePlayButtonColorは実行されない
                 this.cantClick = value;
                 if (value)
                 {
+                    // プレイボタンの色をデフォルトに戻しておく
+                    DataModel.ChangePlayButtonColor(toWarning: false);
+
                     DataModel.RefreshPlayButton();
                 }
                 else
                 {
                     DataModel.ChangePlayButtonInteractable(toWarning: false);
-                    
-                    // ButtonのinteractableをfalseにしているとImageViewを取得できず色を変更出来ないので
-                    if (changeColor)
-                    {
-                        DataModel.RefreshPlayButton();
-                    }
-                    else
-                    {
-                        DataModel.ChangePlayButtonColor(toWarning: false);
-                    }
+
+                    // プレイボタンの色を変えたり変えなかったりするため
+                    DataModel.RefreshPlayButton();
                 }
             }
         }

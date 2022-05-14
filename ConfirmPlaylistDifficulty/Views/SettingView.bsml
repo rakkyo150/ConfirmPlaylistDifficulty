@@ -2,6 +2,6 @@
 	<settings-container spacing='1' child-control-width='true' child-expand-width='true' size-delta-y='-15'>
 		<bool-setting text='Change Color' value='changeColor' apply-on-change='true'></bool-setting>
 		<bool-setting text='Change Text' value='changeText' apply-on-change='true'></bool-setting>
-		<bool-setting text='Change Clickable' value='cantClick' apply-on-change='true'></bool-setting>
+		<bool-setting text='Change Clickable(Prior to Color)' value='cantClick' apply-on-change='true'></bool-setting>
 	</settings-container>
 </bg>

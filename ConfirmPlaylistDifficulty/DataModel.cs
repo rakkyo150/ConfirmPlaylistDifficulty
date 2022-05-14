@@ -19,7 +19,7 @@ namespace ConfirmPlaylistDifficulty
         internal static TextMeshProUGUI _actionButtonText;
         internal static string defaultText;
 
-        internal static bool RefreshPlayButton()
+        internal static void RefreshPlayButton()
         {
             var isTargetLevelSelected = playlistSong?.levelID == difficultyBeatmap?.level?.levelID;
 
@@ -33,21 +33,21 @@ namespace ConfirmPlaylistDifficulty
                     == true;
 
             var shouldWarn = isTargetLevelSelected && !isTargetDifficultySelected;
-            
+
+
+            if (PluginConfig.Instance.CantClick)
+            {
+                // 注意：ButtonのinteractableをfalseにしているとImageViewを取得できず色を変更出来なくなる
+                ChangePlayButtonInteractable(toWarning: shouldWarn);
+            }
             if (PluginConfig.Instance.ChangeColor)
             {
                 ChangePlayButtonColor(toWarning: shouldWarn);
-            }
+            }        
             if (PluginConfig.Instance.ChangeText)
             {
                 ChangePlayButtonText(toWarning: shouldWarn);
             }
-            if (PluginConfig.Instance.CantClick)
-            {
-                ChangePlayButtonInteractable(toWarning: shouldWarn);
-            }
-
-            return shouldWarn;
         }
 
         internal static void ChangePlayButtonColor(bool toWarning)
