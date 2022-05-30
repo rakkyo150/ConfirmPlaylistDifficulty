@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using IPA.Config.Stores;
+using UnityEngine.SceneManagement;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ConfirmPlaylistDifficulty.Configuration
@@ -41,7 +42,11 @@ namespace ConfirmPlaylistDifficulty.Configuration
 
         // IPAによって自動的に呼び出される
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        =>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        {
+            if (SceneManager.GetActiveScene().name == "PCInit") return;
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
@@ -49,6 +54,9 @@ namespace ConfirmPlaylistDifficulty.Configuration
         public virtual void OnReload()
         {
             // Do stuff after config is read from disk.
+
+            if (SceneManager.GetActiveScene().name == "PCInit") return;
+
             this.OnReloaded?.Invoke(this);
         }
 
@@ -58,6 +66,8 @@ namespace ConfirmPlaylistDifficulty.Configuration
         public virtual void Changed()
         {
             // Do stuff when the config is changed.
+            if (SceneManager.GetActiveScene().name == "PCInit") return ;
+
             RefreshColor();
             RefreshText();
             RefreshCantClick();
