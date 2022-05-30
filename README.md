@@ -14,9 +14,9 @@
 v1.0.1で上記の仕様もといバグは修正しました。
 
 v1.1.0では以下の更新があります。
-@yatakabsさんのプルリクでプレイボタンが存在しないときのバグを修正していただきました。<br>
+[@yatakabs](https://github.com/yatakabs)さんのプルリクでプレイボタンが存在しないときのバグを修正していただきました。<br>
 さらに、堅牢な設計にもしていただきました。<br>
 感謝いたします。<br>
 また、プレイボタンのテキスト変更機能とプレイボタンを押せなくする機能を追加しました。<br>
-プレイボタンのテキストは、BeatSaber/UserData/ConfirmPlaylistDifficulty.jsonを直接編集することで変更できます。<br>
+プレイボタンのテキストは、Beat Saber/UserData/ConfirmPlaylistDifficulty.jsonを直接編集することで変更できます。<br>
 もし、このファイルが無い場合は、Beat Saberを一度起動・終了させてからもう一度確認してみてください。
