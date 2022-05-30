@@ -59,6 +59,7 @@ namespace ConfirmPlaylistDifficulty
         public void OnApplicationQuit()
         {
             Log.Debug("OnApplicationQuit");
+            PluginConfig.Instance.Dispose();
             _harmony.UnpatchSelf();
         }
     }

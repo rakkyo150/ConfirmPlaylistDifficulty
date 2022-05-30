@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace ConfirmPlaylistDifficulty
 {
     internal static class DataModel
-    {
+    {   
         internal static Color defaultColor;
         internal static Button _actionButton;
         internal static IDifficultyBeatmap difficultyBeatmap;
@@ -68,13 +68,13 @@ namespace ConfirmPlaylistDifficulty
                 return;
             }
 
-            if (DataModel._actionButton.gameObject == null)
+            if (DataModel._actionButton?.gameObject == null)
             {
                 Plugin.Log.Warn($"DataModel._actionButton is null. Skip starting button change.");
                 return;
             }
 
-            var bg = DataModel._actionButton.GetComponentsInChildren<ImageView>()
+            var bg = DataModel._actionButton?.GetComponentsInChildren<ImageView>()
                 ?.SingleOrDefault(x => x.name == "BG");
 
             if (bg == null)
@@ -128,7 +128,7 @@ namespace ConfirmPlaylistDifficulty
                 return;
             }
 
-            if (DataModel._actionButton.gameObject == null)
+            if (DataModel._actionButton?.gameObject == null)
             {
                 Plugin.Log.Warn($"DataModel._actionButton is null. Skip starting button change.");
                 return;

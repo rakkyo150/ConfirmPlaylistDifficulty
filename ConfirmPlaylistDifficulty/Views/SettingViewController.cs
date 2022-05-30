@@ -7,9 +7,9 @@ using Zenject;
 namespace ConfirmPlaylistDifficulty.Views
 {
     [HotReload]
-    internal class SettingViewController : BSMLResourceViewController, IInitializable
+    internal class SettingViewController : BSMLAutomaticViewController, IInitializable
     {
-        public override string ResourceName => "ConfirmPlaylistDifficulty.Views.SettingView.bsml";
+        public string ResourceName => "ConfirmPlaylistDifficulty.Views.SettingView.bsml";
 
         [UIValue("changeColor")]
         public bool ChangeColor
