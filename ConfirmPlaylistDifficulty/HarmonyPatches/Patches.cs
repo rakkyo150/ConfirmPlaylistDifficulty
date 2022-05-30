@@ -57,7 +57,7 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
                 DataModel.defaultText = actionButtonText.text;
             }
 
-            if (PluginConfig.Instance.ChangeColor || PluginConfig.Instance.ChangeText || PluginConfig.Instance.CantClick)
+            if (PluginConfig.Instance.AnyChangeChecked())
             {
                 DataModel.RefreshPlayButton();
             }

@@ -14,28 +14,27 @@ namespace ConfirmPlaylistDifficulty.Configuration
 
         public PluginConfig()
         {
-            OnReloaded += RefreshColor;
-            OnReloaded += RefreshText;
-            OnReloaded += RefreshCantClick;
-            PropertyChanged += InvokedMethod;
+            OnReloaded += OnReloadMethod;
+            PropertyChanged += PropertyChangedMethod;
         }
 
-        private void InvokedMethod(object sender, PropertyChangedEventArgs e)
+        private void PropertyChangedMethod(object sender, PropertyChangedEventArgs e)
         {
-            RefreshColor();
-            RefreshText();
-            RefreshCantClick();
+            RefreshAll();
         }
+
+        private void OnReloadMethod(PluginConfig pluginConfig) => RefreshAll();
 
         public virtual bool ChangeColor { get; set; } = true;
-
         public virtual bool ChangeText { get; set; } = true;
 
         public virtual string WarnPlayButtonText { get; set; } = "(>_<)";
         public virtual string NormalPlayButtonText { get; set; } = "(⁎ᵕᴗᵕ⁎)";
 
+        public virtual bool CantClick { get; set; } = true;
 
-        public virtual bool CantClick { get; set; } = true; 
+        public bool AnyChangeChecked()
+            => (ChangeColor || ChangeText || CantClick);
 
         public event Action<PluginConfig> OnReloaded;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,8 +42,6 @@ namespace ConfirmPlaylistDifficulty.Configuration
         // IPAによって自動的に呼び出される
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (SceneManager.GetActiveScene().name == "PCInit") return;
-
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -54,9 +51,6 @@ namespace ConfirmPlaylistDifficulty.Configuration
         public virtual void OnReload()
         {
             // Do stuff after config is read from disk.
-
-            if (SceneManager.GetActiveScene().name == "PCInit") return;
-
             this.OnReloaded?.Invoke(this);
         }
 
@@ -66,11 +60,7 @@ namespace ConfirmPlaylistDifficulty.Configuration
         public virtual void Changed()
         {
             // Do stuff when the config is changed.
-            if (SceneManager.GetActiveScene().name == "PCInit") return ;
-
-            RefreshColor();
-            RefreshText();
-            RefreshCantClick();
+            RefreshAll();
         }
 
         /// <summary>
@@ -84,6 +74,21 @@ namespace ConfirmPlaylistDifficulty.Configuration
             this.WarnPlayButtonText = other.WarnPlayButtonText;
             this.NormalPlayButtonText = other.NormalPlayButtonText;
             this.CantClick = other.CantClick;
+        }
+
+        public void Dispose()
+        {
+            OnReloaded -= OnReloadMethod;
+            PropertyChanged -= PropertyChangedMethod;
+        }
+
+        private void RefreshAll()
+        {
+            if (SceneManager.GetActiveScene().name == "PCInit") return;
+
+            RefreshColor();
+            RefreshText();
+            RefreshCantClick();
         }
 
         internal void RefreshColor()
@@ -114,9 +119,7 @@ namespace ConfirmPlaylistDifficulty.Configuration
             {
                 // プレイボタンの色をデフォルトに戻しておく
                 DataModel.ChangePlayButtonColor(toWarning: false);
-
                 DataModel.RefreshPlayButton();
-
                 return;
             }
 
@@ -124,29 +127,6 @@ namespace ConfirmPlaylistDifficulty.Configuration
 
             // プレイボタンの色を変えたり変えなかったりするため
             DataModel.RefreshPlayButton();
-        }
-
-        internal void RefreshColor(PluginConfig pluginConfig)
-        {
-            RefreshColor();
-        }
-
-        internal void RefreshText(PluginConfig pluginConfig)
-        {
-            RefreshText();
-        }
-
-        internal void RefreshCantClick(PluginConfig pluginConfig)
-        {
-            RefreshCantClick();
-        }
-
-        public void Dispose()
-        {
-            OnReloaded -= RefreshColor;
-            OnReloaded -= RefreshText;
-            OnReloaded -= RefreshCantClick;
-            PropertyChanged -= InvokedMethod;
         }
     }
 }

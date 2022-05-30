@@ -36,7 +36,7 @@ namespace ConfirmPlaylistDifficulty
         public void PlaylistSongSelected(IPlaylistSong ps)
         {
             DataModel.playlistSong = ps;
-            if (PluginConfig.Instance.ChangeColor || PluginConfig.Instance.ChangeText || PluginConfig.Instance.CantClick)
+            if (PluginConfig.Instance.AnyChangeChecked())
             {
                 DataModel.RefreshPlayButton();
             }
