@@ -1,14 +1,14 @@
-﻿using System;
+﻿using IPA.Config.Stores;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using IPA.Config.Stores;
 using UnityEngine.SceneManagement;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ConfirmPlaylistDifficulty.Configuration
 {
     [IPA.Config.Stores.Attributes.NotifyPropertyChanges]
-    internal class PluginConfig : INotifyPropertyChanged,IDisposable
+    internal class PluginConfig : INotifyPropertyChanged, IDisposable
     {
         public static PluginConfig Instance { get; set; }
 

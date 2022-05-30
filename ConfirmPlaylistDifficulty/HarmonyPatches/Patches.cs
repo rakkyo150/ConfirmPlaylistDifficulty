@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using ConfirmPlaylistDifficulty.Configuration;
+﻿using ConfirmPlaylistDifficulty.Configuration;
 using HarmonyLib;
 using HMUI;
+using System.Linq;
 using TMPro;
-using UnityEngine;
 
 /// <summary>
 /// See https://github.com/pardeike/Harmony/wiki for a full reference on Harmony.
@@ -36,7 +35,7 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
                 return;
             }
 
-            if(actionButtonText == null)
+            if (actionButtonText == null)
             {
                 Plugin.Log.Error("Failed to obtain actionButtonText.");
                 return;
@@ -52,7 +51,7 @@ namespace ConfirmPlaylistDifficulty.HarmonyPatches
                         ?? default;
             }
 
-            if(DataModel.defaultText == default)
+            if (DataModel.defaultText == default)
             {
                 DataModel.defaultText = actionButtonText.text;
             }

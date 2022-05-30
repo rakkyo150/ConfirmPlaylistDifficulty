@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using BeatSaberPlaylistsLib.Types;
+﻿using BeatSaberPlaylistsLib.Types;
 using ConfirmPlaylistDifficulty.Configuration;
 using HMUI;
 using IPA.Utilities;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace ConfirmPlaylistDifficulty
 {
     internal static class DataModel
-    {   
+    {
         internal static Color defaultColor;
         internal static Button _actionButton;
         internal static IDifficultyBeatmap difficultyBeatmap;
@@ -52,7 +52,7 @@ namespace ConfirmPlaylistDifficulty
             if (PluginConfig.Instance.ChangeColor)
             {
                 ChangePlayButtonColor(toWarning: shouldWarn);
-            }        
+            }
             if (PluginConfig.Instance.ChangeText)
             {
                 ChangePlayButtonText(toWarning: shouldWarn);
@@ -134,7 +134,7 @@ namespace ConfirmPlaylistDifficulty
                 return;
             }
 
-            if(toWarning) DataModel._actionButton.interactable = false;
+            if (toWarning) DataModel._actionButton.interactable = false;
             else DataModel._actionButton.interactable = true;
         }
     }
